@@ -1986,6 +1986,9 @@ char* call::createSendingMessage(SendingMessage *src, int P_index, char *msg_buf
                 play_args = &play_args_i;
             } else if (strstr(begin, "video")) {
                 play_args = &play_args_v;
+            } else if (strstr(begin, "rtcp")){
+                dest += sprintf(dest, "%u", port);
+                break; // rtcp SDP line: no audio socket needed
             } else {
                 ERROR("media_port keyword with no audio or video on the current line (%s)", begin);
             }
